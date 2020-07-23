@@ -5,6 +5,7 @@ import { API_CONFIG } from "../../config/api.config";
 import { LocalUser } from "../../models/local_user";
 import { StorageService } from "./storage.service";
 import { JwtHelper } from 'angular2-jwt';
+import { Component } from '@angular/core';
 
 @Injectable()
 export class AuthService {

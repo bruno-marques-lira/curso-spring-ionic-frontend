@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthService } from './services/auth.service';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,6 +21,7 @@ export class MyApp {
     public auth: AuthService) {
 
     this.initializeApp();
+    
     this.pages = [
       { title: 'Profile', component: 'ProfilePage' },
       { title: 'Categorias', component: 'CategoriasPage' },
@@ -41,8 +42,7 @@ export class MyApp {
     switch (page.title){
       case 'Logout':
         this.auth.logout();
-        const newLocal = 'HomePage';
-        this.nav.setRoot(newLocal);
+        this.nav.setRoot('HomePage');
         break;
       
       default:

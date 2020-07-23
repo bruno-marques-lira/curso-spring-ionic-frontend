@@ -6,5 +6,6 @@ import { HomePage } from './home';
 declarations: [HomePage],
 imports: [IonicPageModule.forChild(HomePage)]
 })
+
 export class HomeModule {
 }

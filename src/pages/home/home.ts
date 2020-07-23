@@ -8,6 +8,7 @@ import { AuthService } from '../../app/services/auth.service';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
   creds : CredenciaisDTO = {
@@ -31,12 +32,13 @@ export class HomePage {
   }
 
   ionViewDidEnter(){
-    this.auth.refreshToken()
+    this.auth.authencicate(this.creds)
     .subscribe(response => {
       this.auth.successfulLogin(response.headers.get('Authorization'));
       this.navCtrl.setRoot("CategoriasPage");
     },
     console => {});
+
   }
 
   login(){

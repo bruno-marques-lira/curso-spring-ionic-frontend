@@ -41,7 +41,8 @@ export class MyApp {
     switch (page.title){
       case 'Logout':
         this.auth.logout();
-        this.nav.setRoot('HomePage');
+        const newLocal = 'HomePage';
+        this.nav.setRoot(newLocal);
         break;
       
       default:

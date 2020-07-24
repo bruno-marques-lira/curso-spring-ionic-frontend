@@ -9,9 +9,9 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="showProdutos()">
+    <button ion-item *ngFor="let item of items" (click)="showProdutos(item.id)">
       <ion-thumbnail item-start>
-        <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
+        <img src="https://spring-boot-ionic-bml.s3-sa-east-1.amazonaws.com/cat{{item.id}}.jpg">
       </ion-thumbnail>
       <h2>{{ item.nome}}</h2>
     </button>

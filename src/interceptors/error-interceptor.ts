@@ -116,7 +116,6 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
             return s;
         }
-    
     }
 
 export const ErrorInterceptorProvider = {

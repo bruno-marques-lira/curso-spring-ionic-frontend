@@ -9,45 +9,47 @@ import { CartService } from "./domain/cart.service";
 
 @Injectable()
 export class AuthService {
-    [x: string]: any;
+        [x: string]: any;
 
-    jwtHelper: JwtHelper = new JwtHelper();
+        jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor(public http: HttpClient, 
-        public storage: StorageService,
-        public cartService: CartService){
+        constructor(
+            public http: HttpClient, 
+            public storage: StorageService,
+            public cartService: CartService){
+        }
+
+        authencicate(creds : CredenciaisDTO){
+            return this.http.post(`${API_CONFIG.baseUrl}/login`,
+            creds,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );   
     }
 
-    authencicate(creds : CredenciaisDTO){
-        return this.http.post(`${API_CONFIG.baseUrl}/login`,
-        creds,
-        {
-            observe: 'response',
-            responseType: 'text'
-        });   
-    }
+        successfulLogin(authorizationValue : string){
+            let tok = authorizationValue.substring(7);
 
-    successfulLogin(authorizationValue : string){
-        let tok = authorizationValue.substring(7);
+            let user : LocalUser = {
+                token: tok,
+                email: this.jwtHelper.decodeToken(tok).sub,
+            };
+            this.storage.setLocalUser(user);
+            this.cartService.createOrClearCart();
+        }
 
-        let user : LocalUser = {
-            token: tok,
-            email: this.jwtHelper.decodeToken(tok).sub,
-        };
-        this.storage.setLocalUser(user);
-        this.cartService.createOrClearCart();
-    }
+        refreshToken(){
+            return this.http.post(`${API_CONFIG.baseUrl}/auth/refresh_token`,
+            {},
+            {
+                observe: 'response',
+                responseType: 'text'
+            });   
+        }
 
-    refreshToken(){
-        return this.http.post(`${API_CONFIG.baseUrl}/auth/refresh_token`,
-        {},
-        {
-            observe: 'response',
-            responseType: 'text'
-        });   
-    }
-
-    logout(){
-        this.storage.setLocalUser(null);
-    }
+        logout(){
+            this.storage.setLocalUser(null);
+        }
 }

@@ -8,6 +8,7 @@ import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
+    [x: string]: any;
 
     jwtHelper: JwtHelper = new JwtHelper();
 
@@ -42,7 +43,7 @@ export class AuthService {
         });   
     }
 
-    logout() {
+    logout(){
         this.storage.setLocalUser(null);
     }
 }

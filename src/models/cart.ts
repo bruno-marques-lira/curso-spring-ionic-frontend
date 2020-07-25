@@ -1,22 +1,20 @@
 import { CartItem } from "./cart-item";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 import { Component } from "@angular/core";
 import { ProdutoService } from "../app/services/domain/produto.service";
 import { API_CONFIG } from "../config/api.config";
+import { CartService } from "../app/services/domain/cart.service";
+import { ProdutoDTO } from "./produto.dto";
 
-IonicPage()
-@Component({
-  selector: 'page-produtos',
-  templateUrl: 'produtos.html',
-})
-export class CartPage {
-  
+export interface Cart { 
   items : CartItem[];
+}
 
-  constructor(
+  /*constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public produtoService: ProdutoService) {
+    public produtoService: ProdutoService,
+    public cartService: CartService) {
   }
 
   ionViewDidLoad() {
@@ -32,9 +30,9 @@ export class CartPage {
   loadImageUrls() {
     for (var i = 0; i < this.items.length; i++) {
       let item = this.items[i];
-      this.produtoService.getSmallImageFromBucket(item.id)
+      this.produtoService.getSmallImageFromBucket(item.produto.id)
         .subscribe(response => {
-          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.produto.id}-small.jpg`;
         },
         error => {});
     }
@@ -43,4 +41,20 @@ export class CartPage {
   showDetail(produto_id : string) {
     this.navCtrl.push('ProdutoDetailPage', {produto_id: produto_id});
   }
-}
+
+  removeItem(produto: ProdutoDTO) {
+    this.items = this.cartService.removeProduto(produto).items;
+  }
+
+  increaseQuantity(produto: ProdutoDTO) {
+    this.items = this.cartService.increaseQuantity(produto).items;
+  }
+
+  decreaseQuantity(produto: ProdutoDTO) {
+    this.items = this.cartService.decreaseQuantity(produto).items;
+  }
+
+  total() : number {
+    return this.cartService.total();
+  }
+}*/

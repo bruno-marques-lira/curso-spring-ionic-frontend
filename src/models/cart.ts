@@ -1,10 +1,4 @@
 import { CartItem } from "./cart-item";
-import { NavController, NavParams } from "ionic-angular";
-import { Component } from "@angular/core";
-import { ProdutoService } from "../app/services/domain/produto.service";
-import { API_CONFIG } from "../config/api.config";
-import { CartService } from "../app/services/domain/cart.service";
-import { ProdutoDTO } from "./produto.dto";
 
 export interface Cart { 
   items : CartItem[];

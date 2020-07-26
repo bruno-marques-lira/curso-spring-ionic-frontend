@@ -1,22 +1,22 @@
-import { Injectable } from "@angular/core";
-import { StorageService } from "../storage.service";
-import { ProdutoDTO } from "../../../models/produto.dto";
-import { Cart } from "../../../models/cart";
+import { Injectable } from '@angular/core';
+import { StorageService } from '../storage.service';
+import { Cart } from '../../../models/cart';
+import { ProdutoDTO } from '../../../models/produto.dto';
 
 @Injectable()
 export class CartService {
 
-    constructor(public storage: StorageService){
+    constructor(public storage: StorageService) {
     }
 
     createOrClearCart() : Cart {
-        let cart : Cart = {items: []};
+        let cart: Cart = {items: []};
         this.storage.setCart(cart);
         return cart;
     }
 
     getCart() : Cart {
-        let cart : Cart = this.storage.getCart();
+        let cart: Cart = this.storage.getCart();
         if (cart == null) {
             cart = this.createOrClearCart();
         }
@@ -27,51 +27,25 @@ export class CartService {
         let cart = this.getCart();
         let position = cart.items.findIndex(x => x.produto.id == produto.id);
         if (position == -1) {
-            cart.items.push({quantidade: 1, produto: produto, imageUrl: 'assets/imgs/prod.jpg'});
+            cart.items.push({quantidade: 1, produto: produto});
         }
         this.storage.setCart(cart);
         return cart;
     }
 
-    removeProduto(produto: ProdutoDTO) : Cart {
-        let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
-        if (position != -1) {
-            cart.items.splice(position, 1);
-        }
-        this.storage.setCart(cart);
-        return cart;
+    /*removeProduto(produto: ProdutoDTO) : Cart {
+      throw new Error("Method not implemented.");
     }
 
     increaseQuantity(produto: ProdutoDTO) : Cart {
-        let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
-        if (position != -1) {
-            cart.items[position].quantidade++;
-        }
-        this.storage.setCart(cart);
-        return cart;
+      throw new Error("Method not implemented.");
     }
 
-    decreaseQuantity(produto: ProdutoDTO) : Cart {
-        let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
-        if (position != -1) {
-            cart.items[position].quantidade--;
-            if (cart.items[position].quantidade < 1) {
-                cart = this.removeProduto(produto);
-            }
-        }
-        this.storage.setCart(cart);
-        return cart;
+    decreaseQuantity(produto: ProdutoDTO) : Cart{
+      throw new Error("Method not implemented.");
     }
 
-    total() : number {
-        let cart = this.getCart();
-        let sum = 0;
-        for (var i = 0; i < cart.items.length; i++) {
-            sum += cart.items[i].produto.preco * cart.items[i].quantidade;
-        }
-        return sum;
-    }
+    total(): number {
+      throw new Error("Method not implemented.");
+    }*/
 }

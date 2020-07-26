@@ -4,6 +4,7 @@ import { CartItem } from '../../models/cart-item';
 import { CartService } from '../../app/services/domain/cart.service';
 import { ProdutoService } from '../../app/services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
+import { ProdutoDTO } from '../../models/produto.dto';
 
 @IonicPage()
 @Component({
@@ -36,5 +37,25 @@ export class CartPage {
         },
         error => {});
     }
+  }
+
+  removeProduto(produto: ProdutoDTO) {
+    this.items = this.cartService.removeProduto(produto).items;
+  }
+
+  increaseQuantity(produto : ProdutoDTO) {
+    this.items = this.cartService.increaseQuantity(produto).items;
+  }
+
+  decreaseQuantity(produto: ProdutoDTO) {
+    this.items = this.cartService.decreaseQuantity(produto).items;
+  }
+
+  total() : number {
+    return this.cartService.total();
+  }
+
+  goOn() {
+    this.navCtrl.setRoot('CategoriasPage');
   }
 }

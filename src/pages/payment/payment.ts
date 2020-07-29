@@ -8,12 +8,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'page-payment',
   templateUrl: 'payment.html',
 })
+
 export class PaymentPage {
-
   pedido: PedidoDTO;
-
   parcelas: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   formGroup: FormGroup;
 
   constructor(
@@ -30,7 +28,9 @@ export class PaymentPage {
   }
 
   nextPage() {
-    this.pedido.pagamento = this.formGroup.value;
-    this.navCtrl.setRoot('OrderConfirmationPage', {pedido: this.pedido})
+    console.log(this.pedido.pagamento);
+    console.log(this.formGroup.value);
+    this.pedido.pagamento = this.formGroup.value;    
+    this.navCtrl.setRoot('OrderConfirmationPage', {pedido: this.pedido});
   }
 }
